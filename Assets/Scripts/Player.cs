@@ -72,6 +72,34 @@ public class Player : MonoBehaviour
         myRigidbody2D.velocity = new Vector2(jumpPowerX, jumpPowerY);
         myAnimator.SetTrigger("Jump");
 
+        didJump = true;
+
         jumpPowerX = jumpPowerY = 0f;
+    }
+
+    void OnTriggerEnter2D(Collider2D target)
+    {
+        if (didJump)
+        {
+            didJump = false;
+
+            if (target.tag == "Platform")
+            {
+                if (GameManager.instance != null)
+                {
+                    GameManager.instance.CreateNewPlatformAndLerp(target.transform.position.x);
+                }
+            }
+        }
+
+        if (target.tag == "DeathCollider")
+        {
+            if (GameOverManager.instance != null)
+            {
+                GameOverManager.instance.GameOver();
+            }
+
+            Destroy(gameObject, 0.1f);
+        }
     }
 }
