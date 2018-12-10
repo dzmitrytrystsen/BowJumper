@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\JumpButton.cs" />
     <Compile Include="Assets\Scripts\MainMenuController.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\ScoreManager.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/DZMITRY TRYSTSEN/Unity/BowJumper/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

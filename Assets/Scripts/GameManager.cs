@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject platform;
 
-    private float minX = -2f, maxX = 2f, minY = -4.5f, maxY = -2f;
+    private float minX = -2f, maxX = 2f, minY = -4.5f, maxY = -3f;
 
     private bool lerpCamera;
     private float lerpTime = 1.5f;
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     void CreateInitialPlatform()
     {
-        Vector2 temp = new Vector2(Random.Range(minX, minX + 1f), Random.Range(minY, maxY));
+        Vector2 temp = new Vector2(Random.Range(minX, minX + 1.5f), Random.Range(minY, maxY));
 
         Instantiate(platform, temp, Quaternion.identity);
 

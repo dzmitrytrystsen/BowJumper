@@ -55,7 +55,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.0001
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -121,8 +121,13 @@ MonoBehaviour:
   myAnimator: {fileID: 0}
   jumpPowerX: 0
   jumpPowerY: 0
-  jumpPowerXMax: 5
+  jumpPowerXMax: 9
   jumpPowerYMax: 12
+  bowPower: 5
+  deadZone: 10
+  arrowPrefab: {fileID: 1655720292560266, guid: e93bc6ffc1f34374592a05dfc2585ac9,
+    type: 2}
+  dotsNumber: 10
 --- !u!212 &212146386872679882
 SpriteRenderer:
   m_ObjectHideFlags: 1

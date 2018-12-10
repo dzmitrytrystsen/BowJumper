@@ -14,6 +14,9 @@ public class GameOverManager : MonoBehaviour
     private Button menuButton, restartButton;
 
     private Text score;
+    private GameObject scorePanel;
+    private GameObject powerBar;
+    private GameObject scoreText;
 
 	void Awake ()
 	{
@@ -28,7 +31,11 @@ public class GameOverManager : MonoBehaviour
         menuButton.onClick.AddListener(() => BackToMenu());
         restartButton.onClick.AddListener(() => RestartGame());
 
-	    score = GameObject.Find("Score").GetComponent<Text>();
+        scorePanel = GameObject.Find("ScorePanel");
+        scoreText = GameObject.Find("Score");
+	    score = GameObject.Find("FinalScore").GetComponent<Text>();
+
+	    powerBar = GameObject.Find("PowerBar");
 
         gameOverPanel.SetActive(false);
 	}
@@ -41,8 +48,14 @@ public class GameOverManager : MonoBehaviour
 
     public void GameOver()
     {
+        scoreText.SetActive(false);
+        scorePanel.SetActive(false);
+        powerBar.SetActive(false);
+
         gameOverPanel.SetActive(true);
         gameOverPanelAnimator.Play("GameOverPanelFade");
+
+        score.text = "" + ScoreManager.instance.GetScore();
     }
 
     public void RestartGame()
