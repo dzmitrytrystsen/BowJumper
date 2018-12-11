@@ -61,12 +61,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\RainMaker\Prefab\BaseRainScript.cs" />
+    <Compile Include="Assets\RainMaker\Prefab\RainCollision.cs" />
+    <Compile Include="Assets\RainMaker\Prefab\RainScript.cs" />
+    <Compile Include="Assets\RainMaker\Prefab\RainScript2D.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GameOverManager.cs" />
     <Compile Include="Assets\Scripts\JumpButton.cs" />
     <Compile Include="Assets\Scripts\MainMenuController.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\ScoreManager.cs" />
+    <None Include="Assets\RainMaker\Prefab\RainShader.shader" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/DZMITRY TRYSTSEN/Unity/BowJumper/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

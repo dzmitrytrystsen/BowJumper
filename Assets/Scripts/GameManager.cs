@@ -81,4 +81,16 @@ public class GameManager : MonoBehaviour
             lerpCamera = false;
         }
     }
+
+    public void SlowTime(float duration, float speed)
+    {  //1 = normal speed, 2 = double speed, 0 = standstill. 0.5f = half speed etc
+        Time.timeScale = speed;
+        StartCoroutine(ResumeNormalSpeed(duration));
+    }
+
+    public IEnumerator ResumeNormalSpeed(float duration)
+    {
+        yield return new WaitForSeconds(duration * Time.deltaTime);
+        Time.timeScale = 1f;
+    }
 }

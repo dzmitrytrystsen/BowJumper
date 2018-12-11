@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Experimental.UIElements;
+using Slider = UnityEngine.UI.Slider;
 
 public class Player : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
     public Animator myAnimator;
 
     [SerializeField] private float jumpPowerX, jumpPowerY, jumpPowerXMax = 6.5f, jumpPowerYMax = 13.5f;
+    [SerializeField] private bool ifCanShoot;
     
     private float tresholdX = 7f;
     private float tresholdY = 14f;
@@ -70,7 +72,11 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        Aim();
+        if (ifCanShoot)
+        {
+            Aim();
+        }
+
         SetPower();
     }
 
@@ -91,8 +97,13 @@ public class Player : MonoBehaviour
                         new Vector2(transform.position.x + 0.5f, transform.position.y),
                         Quaternion.identity) as GameObject;
 
-                arrow.GetComponent<Rigidbody2D>().isKinematic = true;
-                arrow.GetComponent<Renderer>().enabled = false;
+                //arrow.GetComponent<Rigidbody2D>().isKinematic = true;
+                //arrow.GetComponent<Renderer>().enabled = false;
+
+                arrow.transform.Find("ArrowTip").GetComponent<Renderer>().enabled = false;
+                arrow.transform.Find("ArrowTale").GetComponent<Renderer>().enabled = false;
+                arrow.transform.Find("ArrowTip").GetComponent<Rigidbody2D>().isKinematic = true;
+                arrow.transform.Find("ArrowTale").GetComponent<Rigidbody2D>().isKinematic = true;
 
                 myAnimator.SetTrigger("Bow");
                 myAnimator.SetBool("BowIdle", true);
@@ -117,11 +128,21 @@ public class Player : MonoBehaviour
                 return;
             }
 
-            arrow.GetComponent<Rigidbody2D>().isKinematic = false;
+            //arrow.GetComponent<Rigidbody2D>().isKinematic = false;
+            //arrow.GetComponent<Renderer>().enabled = true;
+
             //shoot = true;
             aiming = false;
-            arrow.GetComponent<Renderer>().enabled = true;
-            arrow.GetComponent<Rigidbody2D>().AddForce(GetForce(Input.mousePosition));
+
+            //arrow.GetComponent<Rigidbody2D>().AddForce(GetForce(Input.mousePosition));
+
+            arrow.transform.Find("ArrowTip").GetComponent<Renderer>().enabled = true;
+            arrow.transform.Find("ArrowTale").GetComponent<Renderer>().enabled = true;
+            arrow.transform.Find("ArrowTip").GetComponent<Rigidbody2D>().isKinematic = false;
+            arrow.transform.Find("ArrowTale").GetComponent<Rigidbody2D>().isKinematic = false;
+
+            arrow.transform.Find("ArrowTip").GetComponent<Rigidbody2D>().AddForce(GetForce(Input.mousePosition));
+            arrow.transform.Find("ArrowTale").GetComponent<Rigidbody2D>().AddForce(GetForce(Input.mousePosition));
 
             myAnimator.SetBool("BowIdle", false);
             myAnimator.SetTrigger("BowShot");
@@ -146,7 +167,7 @@ public class Player : MonoBehaviour
 
     private bool inRealeseZone(Vector2 mouse)
     {
-        if (-Mathf.Abs(mouse.x) >= 0f)
+        if (mouse.x >= 70f)
         {
             return true;
         }
@@ -180,7 +201,7 @@ public class Player : MonoBehaviour
 
     void CalculatePath()
     {
-        Vector2 vel = GetForce(Input.mousePosition) * Time.fixedDeltaTime / arrow.GetComponent<Rigidbody2D>().mass;
+        Vector2 vel = GetForce(Input.mousePosition) * Time.fixedDeltaTime / arrow.transform.Find("ArrowTip").GetComponent<Rigidbody2D>().mass;
 
         for (int i = 0; i < arrowPath.Count; i++)
         {
@@ -208,7 +229,7 @@ public class Player : MonoBehaviour
         if (setPower)
         {
             jumpPowerX += tresholdX * Time.deltaTime;
-            jumpPowerY += tresholdY * Time.deltaTime;
+            jumpPowerY += tresholdY * 2f * Time.deltaTime;
 
             if (jumpPowerX > jumpPowerXMax)
                 jumpPowerX = jumpPowerXMax;
@@ -228,13 +249,30 @@ public class Player : MonoBehaviour
         if (!setPower)
         {
             Jump();
+            //ShootAfterJump();
+        }
+    }
+
+    private void ShootAfterJump()
+    {
+        if (didJump == true)
+        {
+            GameObject.Find("JumpButton").SetActive(false);
+            GameManager.instance.SlowTime(10f, 0.3f);
+            ifCanShoot = true;
         }
 
-        if (setPower)
-            Debug.Log("Setting the Power");
-
         else
-            Debug.Log("Not setting the Power");
+        {
+            GameObject.Find("JumpButton").SetActive(true);
+            ifCanShoot = false;
+        }
+    }
+
+    public void ContinueJumping()
+    {
+        GameObject.Find("JumpButton").SetActive(true);
+        ifCanShoot = false;
     }
 
     private void Jump()
