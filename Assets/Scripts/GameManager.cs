@@ -6,10 +6,14 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
+
     public static GameManager instance;
 
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject platform;
+
+    [SerializeField] public int platformsAmount;
+
 
     private float minX = -2f, maxX = 2f, minY = -4.5f, maxY = -3f;
 
@@ -17,11 +21,11 @@ public class GameManager : MonoBehaviour
     private float lerpTime = 1.5f;
     private float lerpX;
 
-	void Awake ()
-	{
-	    SetUpInstance();
+    void Awake()
+    {
+        SetUpInstance();
         CreateInitialPlatform();
-	}
+    }
 
 
     void Update()
@@ -36,6 +40,16 @@ public class GameManager : MonoBehaviour
             instance = this;
     }
 
+    public void AddPlatform()
+    {
+        platformsAmount++;
+    }
+
+    public void SubstractPlatform()
+    {
+        platformsAmount--;
+    }
+
     void CreateInitialPlatform()
     {
         Vector2 temp = new Vector2(Random.Range(minX, minX + 1.5f), Random.Range(minY, maxY));
@@ -44,16 +58,23 @@ public class GameManager : MonoBehaviour
 
         temp.y += 2f;
 
+        AddPlatform();
+
         Instantiate(player, temp, Quaternion.identity);
 
         temp = new Vector2(Random.Range(maxX, maxX - 1f), Random.Range(minY, maxY));
 
         Instantiate(platform, temp, Quaternion.identity);
+
+        AddPlatform();
     }
 
     public void CreateNewPlatformAndLerp(float lerpPosition)
     {
-        CreateNewPlatform();
+        if (platformsAmount <= 2)
+        {
+            CreateNewPlatform();
+        }
 
         lerpX = lerpPosition + maxX;
         lerpCamera = true;
@@ -65,7 +86,9 @@ public class GameManager : MonoBehaviour
         float newMaxX = (maxX * 2f) + cameraX;
 
         Instantiate(platform, new Vector2(Random.Range(newMaxX, newMaxX - 1f),
-                                        Random.Range(maxY, maxY - 1f)), Quaternion.identity);
+            Random.Range(maxY, maxY - 1f)), Quaternion.identity);
+
+        AddPlatform();
     }
 
     void LerpCamera()
@@ -74,7 +97,8 @@ public class GameManager : MonoBehaviour
 
         x = Mathf.Lerp(x, lerpX, lerpTime * Time.deltaTime);
 
-        Camera.main.transform.position = new Vector3(x, Camera.main.transform.position.y, Camera.main.transform.position.z);
+        Camera.main.transform.position =
+            new Vector3(x, Camera.main.transform.position.y, Camera.main.transform.position.z);
 
         if (Camera.main.transform.position.x >= (lerpX - 0.1f))
         {
@@ -83,7 +107,8 @@ public class GameManager : MonoBehaviour
     }
 
     public void SlowTime(float duration, float speed)
-    {  //1 = normal speed, 2 = double speed, 0 = standstill. 0.5f = half speed etc
+    {
+        //1 = normal speed, 2 = double speed, 0 = standstill. 0.5f = half speed etc
         Time.timeScale = speed;
         StartCoroutine(ResumeNormalSpeed(duration));
     }
@@ -94,3 +119,4 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 }
+

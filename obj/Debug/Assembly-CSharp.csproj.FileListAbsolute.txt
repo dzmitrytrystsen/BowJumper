@@ -338,3 +338,5 @@ C:\Users\DZMITRY TRYSTSEN\Unity\BowJumper\obj\Debug\Assembly-CSharp.csproj.CoreC
 C:\Users\DZMITRY TRYSTSEN\Unity\BowJumper\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\DZMITRY TRYSTSEN\Unity\BowJumper\obj\Debug\Assembly-CSharp.dll
 C:\Users\DZMITRY TRYSTSEN\Unity\BowJumper\obj\Debug\Assembly-CSharp.pdb
+C:\Users\DZMITRY TRYSTSEN\Unity\BowJumper\Temp\bin\Debug\UnityEditor.UI.dll
+C:\Users\DZMITRY TRYSTSEN\Unity\BowJumper\Temp\bin\Debug\UnityEditor.UI.xml

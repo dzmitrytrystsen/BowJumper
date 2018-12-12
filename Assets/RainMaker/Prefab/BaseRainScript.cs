@@ -20,14 +20,14 @@ namespace DigitalRuby.RainMaker
         [Tooltip("Whether rain should follow the camera. If false, rain must be moved manually and will not follow the camera.")]
         public bool FollowCamera = true;
 
-        [Tooltip("Light rain looping clip")]
-        public AudioClip RainSoundLight;
+        //[Tooltip("Light rain looping clip")]
+        //public AudioClip RainSoundLight;
 
-        [Tooltip("Medium rain looping clip")]
-        public AudioClip RainSoundMedium;
+        //[Tooltip("Medium rain looping clip")]
+        //public AudioClip RainSoundMedium;
 
-        [Tooltip("Heavy rain looping clip")]
-        public AudioClip RainSoundHeavy;
+        //[Tooltip("Heavy rain looping clip")]
+        //public AudioClip RainSoundHeavy;
 
         [Tooltip("Intensity of rain (0-1)")]
         [Range(0.0f, 1.0f)]
@@ -225,9 +225,10 @@ namespace DigitalRuby.RainMaker
                 Camera = Camera.main;
             }
 
-            audioSourceRainLight = new LoopingAudioSource(this, RainSoundLight);
-            audioSourceRainMedium = new LoopingAudioSource(this, RainSoundMedium);
-            audioSourceRainHeavy = new LoopingAudioSource(this, RainSoundHeavy);
+            //audioSourceRainLight = new LoopingAudioSource(this, RainSoundLight);
+            //audioSourceRainMedium = new LoopingAudioSource(this, RainSoundMedium);
+            //audioSourceRainHeavy = new LoopingAudioSource(this, RainSoundHeavy);
+            audioSourceRainHeavy = new LoopingAudioSource(this, WindSound);
             audioSourceWind = new LoopingAudioSource(this, WindSound);
 
             if (RainFallParticleSystem != null)
@@ -283,8 +284,8 @@ namespace DigitalRuby.RainMaker
 
             CheckForRainChange();
             UpdateWind();
-            audioSourceRainLight.Update();
-            audioSourceRainMedium.Update();
+            //audioSourceRainLight.Update();
+            //audioSourceRainMedium.Update();
             audioSourceRainHeavy.Update();
         }
 

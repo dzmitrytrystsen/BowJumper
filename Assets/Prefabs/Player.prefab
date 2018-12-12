@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 61526663821589018}
   - component: {fileID: 50885091658709434}
   - component: {fileID: 114994530479938042}
-  - component: {fileID: 61164972879469620}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -39,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1861660793924746}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3426066, y: -3.508978, z: -5}
+  m_LocalPosition: {x: -0.990061, y: -3.6730466, z: -5}
   m_LocalScale: {x: 0.5235373, y: 0.5235373, z: 0.5235373}
   m_Children: []
   m_Father: {fileID: 0}
@@ -63,33 +62,8 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &61164972879469620
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1861660793924746}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.0000009536743, y: 0.039899588}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.9682539, y: 2.936508}
-    newSize: {x: 5, y: 3.7}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.7763306, y: 1.7395384}
-  m_EdgeRadius: 0
 --- !u!61 &61526663821589018
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -102,7 +76,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0061240196, y: -1.2172885}
+  m_Offset: {x: 0.14815521, y: -1.1899521}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -113,7 +87,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8018725, y: 0.1968875}
+  m_Size: {x: 1.0490429, y: 0.40571576}
   m_EdgeRadius: 0
 --- !u!95 &95296222796330820
 Animator:
@@ -150,6 +124,9 @@ MonoBehaviour:
   jumpPowerXMax: 5
   jumpPowerYMax: 15
   ifCanShoot: 0
+  ifCanJump: 0
+  setPower: 0
+  didJump: 0
   bowPower: 10
   deadZone: 1
   arrowPrefab: {fileID: 1046263381387172, guid: e93bc6ffc1f34374592a05dfc2585ac9,

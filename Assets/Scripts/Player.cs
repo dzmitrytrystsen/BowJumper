@@ -16,15 +16,18 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float jumpPowerX, jumpPowerY, jumpPowerXMax = 6.5f, jumpPowerYMax = 13.5f;
     [SerializeField] private bool ifCanShoot;
-    
+    [SerializeField] private bool ifCanJump;
+
     private float tresholdX = 7f;
     private float tresholdY = 14f;
 
-    private bool setPower, didJump;
+    public bool setPower, didJump;
 
     private Slider powerBar;
     private float powerBarTreshold = 10f;
     private float powerBarValue = 0f;
+
+    private GameObject jumpButton;
 
     //BowLogic
     [SerializeField] public float bowPower = 2f;
@@ -64,6 +67,7 @@ public class Player : MonoBehaviour
         myRigidbody2D = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         powerBar = GameObject.Find("PowerBar").GetComponent<Slider>();
+        jumpButton = GameObject.Find("JumpButton");
 
         powerBar.minValue = 0f;
         powerBar.maxValue = 10f;
@@ -77,7 +81,10 @@ public class Player : MonoBehaviour
             Aim();
         }
 
-        SetPower();
+        if (ifCanJump)
+        {
+            SetPower();
+        }
     }
 
     void Aim()
@@ -228,7 +235,7 @@ public class Player : MonoBehaviour
     {
         if (setPower)
         {
-            jumpPowerX += tresholdX * Time.deltaTime;
+            jumpPowerX += tresholdX * 1.5f * Time.deltaTime;
             jumpPowerY += tresholdY * 2f * Time.deltaTime;
 
             if (jumpPowerX > jumpPowerXMax)
@@ -297,11 +304,6 @@ public class Player : MonoBehaviour
 
             if (target.tag == "Platform")
             {
-                if (GameManager.instance != null)
-                {
-                    GameManager.instance.CreateNewPlatformAndLerp(target.transform.position.x);
-                }
-
                 if (ScoreManager.instance != null)
                 {
                     ScoreManager.instance.AddScore();
@@ -309,6 +311,11 @@ public class Player : MonoBehaviour
 
                 myAnimator.SetBool("isFalling", false);
             }
+        }
+
+        if (target.tag == "EffectorCollider")
+        {
+            myAnimator.SetBool("isFalling", false);
         }
 
         if (target.tag == "DeathCollider")
@@ -319,6 +326,24 @@ public class Player : MonoBehaviour
             }
 
             Destroy(gameObject, 0.1f);
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D target)
+    {
+        if (target.tag == "Platform")
+        {
+            ifCanJump = true;
+            jumpButton.SetActive(true);
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D target)
+    {
+        if (target.tag == "Platform")
+        {
+            ifCanJump = false;
+            jumpButton.SetActive(false);
         }
     }
 }
