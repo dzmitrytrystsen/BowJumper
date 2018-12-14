@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.UIElements;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
@@ -11,11 +12,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject platform;
+    [SerializeField] private GameObject enemy;
 
     [SerializeField] public int platformsAmount;
 
 
-    private float minX = -2f, maxX = 2f, minY = -4.5f, maxY = -3f;
+    private float minX = -2f, maxX = 2f, minY = -4f, maxY = -3f;
 
     private bool lerpCamera;
     private float lerpTime = 1.5f;
@@ -56,7 +58,7 @@ public class GameManager : MonoBehaviour
 
         Instantiate(platform, temp, Quaternion.identity);
 
-        temp.y += 2f;
+        temp.y += 5f;
 
         AddPlatform();
 
@@ -65,6 +67,10 @@ public class GameManager : MonoBehaviour
         temp = new Vector2(Random.Range(maxX, maxX - 1f), Random.Range(minY, maxY));
 
         Instantiate(platform, temp, Quaternion.identity);
+
+        temp.y += 1f;
+
+        Instantiate(enemy, temp, Quaternion.identity);
 
         AddPlatform();
     }
@@ -85,8 +91,14 @@ public class GameManager : MonoBehaviour
         float cameraX = Camera.main.transform.position.x;
         float newMaxX = (maxX * 2f) + cameraX;
 
-        Instantiate(platform, new Vector2(Random.Range(newMaxX, newMaxX - 1f),
-            Random.Range(maxY, maxY - 1f)), Quaternion.identity);
+        Vector2 temp = new Vector2(Random.Range(newMaxX, newMaxX - 0.3f),
+            Random.Range(maxY, maxY - 0.5f));
+
+        Instantiate(platform, temp, Quaternion.identity);
+
+        temp.y += 1f;
+        Instantiate(enemy, temp, Quaternion.identity);
+
 
         AddPlatform();
     }
@@ -106,17 +118,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SlowTime(float duration, float speed)
-    {
-        //1 = normal speed, 2 = double speed, 0 = standstill. 0.5f = half speed etc
-        Time.timeScale = speed;
-        StartCoroutine(ResumeNormalSpeed(duration));
-    }
+    //public void SlowTime(float duration, float speed)
+    //{
+    //    //1 = normal speed, 2 = double speed, 0 = standstill. 0.5f = half speed etc
+    //    Time.timeScale = speed;
+    //    StartCoroutine(ResumeNormalSpeed(duration));
+    //}
 
-    public IEnumerator ResumeNormalSpeed(float duration)
-    {
-        yield return new WaitForSeconds(duration * Time.deltaTime);
-        Time.timeScale = 1f;
-    }
+    //public IEnumerator ResumeNormalSpeed(float duration)
+    //{
+    //    yield return new WaitForSeconds(duration * Time.deltaTime);
+    //    Time.timeScale = 1f;
+    //}
 }
 

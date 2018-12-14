@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8889c39739b93224893a6cf858dcc918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 0
 --- !u!114 &114383202696393702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -77,4 +78,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1861660793924746, guid: a04a5f0e5a99eb744b798ac526554cad, type: 2}
   platform: {fileID: 1871451535448162, guid: 22df90610286eec439c2e88787ef9b14, type: 2}
+  enemy: {fileID: 1908594433818726, guid: 565c03ba8b9df824ea94d93aea4e29a3, type: 2}
   platformsAmount: 0

@@ -15,11 +15,17 @@ public class Platform : MonoBehaviour
             GameManager.instance.SubstractPlatform();
         }
 
-        if (target.tag == "Player")
+        if (target.tag == "Player" && Player.instance.didJump)
         {
             if (GameManager.instance != null)
             {
                 GameManager.instance.CreateNewPlatformAndLerp(target.transform.position.x);
+            }
+
+            if (ScoreManager.instance != null)
+            {
+                ScoreManager.instance.AddScore();
+                Debug.Log("Landed");
             }
         }
     }

@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 212220458535877114}
   - component: {fileID: 50802888819554098}
   - component: {fileID: 61415707908981614}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: ArrowTale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,9 +56,9 @@ GameObject:
   - component: {fileID: 50978194319924914}
   - component: {fileID: 61359411757280080}
   - component: {fileID: 255923069928230468}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: ArrowTip
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,7 +153,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.013079472, y: -0.0043597817}
@@ -227,7 +227,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1245664123
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300002, guid: 3f695e70c74e60c47b366b8718f1f4a2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -273,7 +273,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1245664123
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3f695e70c74e60c47b366b8718f1f4a2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

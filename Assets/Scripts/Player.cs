@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     private float tresholdX = 7f;
     private float tresholdY = 14f;
 
-    public bool setPower, didJump;
+    public bool setPower, didJump, isTimeSlow;
 
     private Slider powerBar;
     private float powerBarTreshold = 10f;
@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
     public int dotsNumber = 10;
 
     private Vector2 startPosition;
-    private bool /*shoot = false,*/ aiming = false;
+    private bool shoot, aiming = false;
 
     void Awake()
     {
@@ -60,6 +60,8 @@ public class Player : MonoBehaviour
         {
             arrowPath[i].GetComponent<Renderer>().enabled = false;
         }
+
+        myAnimator.SetBool("isFalling", true);
     }
 
     private void Initialization()
@@ -76,6 +78,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        //ShootAfterJump(.1f);
+
         if (ifCanShoot)
         {
             Aim();
@@ -91,18 +95,19 @@ public class Player : MonoBehaviour
     {
         //if (shoot)
         //    return;
-
         if (Input.GetAxis("Fire1") == 1)
         {
             if (!aiming)
             {
+                ShootAfterJump(.1f);
+
                 aiming = true;
                 startPosition = Input.mousePosition;
 
                 arrow = Instantiate(
-                        arrowPrefab,
-                        new Vector2(transform.position.x + 0.5f, transform.position.y),
-                        Quaternion.identity) as GameObject;
+                    arrowPrefab,
+                    new Vector2(transform.position.x + 0.5f, transform.position.y),
+                    Quaternion.identity) as GameObject;
 
                 //arrow.GetComponent<Rigidbody2D>().isKinematic = true;
                 //arrow.GetComponent<Renderer>().enabled = false;
@@ -112,8 +117,8 @@ public class Player : MonoBehaviour
                 arrow.transform.Find("ArrowTip").GetComponent<Rigidbody2D>().isKinematic = true;
                 arrow.transform.Find("ArrowTale").GetComponent<Rigidbody2D>().isKinematic = true;
 
-                myAnimator.SetTrigger("Bow");
-                myAnimator.SetBool("BowIdle", true);
+                //myAnimator.SetTrigger("Bow");
+                //myAnimator.SetBool("BowIdle", true);
 
                 CalculatePath();
                 ShowPath();
@@ -126,7 +131,7 @@ public class Player : MonoBehaviour
         }
 
 
-        else if (aiming /*&& !shoot*/)
+        else if (aiming && !shoot)
         {
             if (inDeadZone(Input.mousePosition) || inRealeseZone(Input.mousePosition))
             {
@@ -138,7 +143,7 @@ public class Player : MonoBehaviour
             //arrow.GetComponent<Rigidbody2D>().isKinematic = false;
             //arrow.GetComponent<Renderer>().enabled = true;
 
-            //shoot = true;
+            shoot = true;
             aiming = false;
 
             //arrow.GetComponent<Rigidbody2D>().AddForce(GetForce(Input.mousePosition));
@@ -151,8 +156,10 @@ public class Player : MonoBehaviour
             arrow.transform.Find("ArrowTip").GetComponent<Rigidbody2D>().AddForce(GetForce(Input.mousePosition));
             arrow.transform.Find("ArrowTale").GetComponent<Rigidbody2D>().AddForce(GetForce(Input.mousePosition));
 
-            myAnimator.SetBool("BowIdle", false);
+            //myAnimator.SetBool("BowIdle", false);
             myAnimator.SetTrigger("BowShot");
+
+            ResumeTime();
 
             Destroy(arrow, 5f);
             HidePath();
@@ -174,7 +181,7 @@ public class Player : MonoBehaviour
 
     private bool inRealeseZone(Vector2 mouse)
     {
-        if (mouse.x >= 70f)
+        if (mouse.x >= 150f)
         {
             return true;
         }
@@ -236,7 +243,7 @@ public class Player : MonoBehaviour
         if (setPower)
         {
             jumpPowerX += tresholdX * 1.5f * Time.deltaTime;
-            jumpPowerY += tresholdY * 2f * Time.deltaTime;
+            jumpPowerY += tresholdY * 2.5f * Time.deltaTime;
 
             if (jumpPowerX > jumpPowerXMax)
                 jumpPowerX = jumpPowerXMax;
@@ -256,34 +263,13 @@ public class Player : MonoBehaviour
         if (!setPower)
         {
             Jump();
-            //ShootAfterJump();
         }
-    }
-
-    private void ShootAfterJump()
-    {
-        if (didJump == true)
-        {
-            GameObject.Find("JumpButton").SetActive(false);
-            GameManager.instance.SlowTime(10f, 0.3f);
-            ifCanShoot = true;
-        }
-
-        else
-        {
-            GameObject.Find("JumpButton").SetActive(true);
-            ifCanShoot = false;
-        }
-    }
-
-    public void ContinueJumping()
-    {
-        GameObject.Find("JumpButton").SetActive(true);
-        ifCanShoot = false;
     }
 
     private void Jump()
     {
+        ifCanShoot = true;
+
         myRigidbody2D.velocity = new Vector2(jumpPowerX, jumpPowerY);
         myAnimator.SetTrigger("Jump");
         myAnimator.SetBool("isFalling", true);
@@ -296,21 +282,41 @@ public class Player : MonoBehaviour
         powerBar.value = powerBarValue;
     }
 
+    private void ShootAfterJump( float speed)
+    {
+        isTimeSlow = true;
+
+        //if (transform.position.y >= -0.7f)
+        //{
+        Time.timeScale = speed;
+        //}
+    }
+
+    public void ResumeTime()
+    {
+        if (isTimeSlow)
+        {
+            isTimeSlow = false;
+
+            ifCanShoot = false;
+            Time.timeScale = 1f;
+
+            myAnimator.SetBool("isFalling", true);
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D target)
     {
         if (didJump)
         {
             didJump = false;
+        }
 
-            if (target.tag == "Platform")
-            {
-                if (ScoreManager.instance != null)
-                {
-                    ScoreManager.instance.AddScore();
-                }
-
-                myAnimator.SetBool("isFalling", false);
-            }
+        if (target.tag == "Platform")
+        {
+            shoot = false;
+            myAnimator.SetBool("isFalling", false);
+            //myAnimator.SetBool("BowIdle", false);
         }
 
         if (target.tag == "EffectorCollider")
@@ -325,6 +331,7 @@ public class Player : MonoBehaviour
                 GameOverManager.instance.GameOver();
             }
 
+            ResumeTime();
             Destroy(gameObject, 0.1f);
         }
     }
