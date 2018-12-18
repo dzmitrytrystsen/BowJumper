@@ -83,6 +83,7 @@ public class Player : MonoBehaviour
         if (ifCanShoot)
         {
             Aim();
+            Debug.Log(Input.mousePosition.x);
         }
 
         if (ifCanJump)
@@ -105,9 +106,9 @@ public class Player : MonoBehaviour
                 startPosition = Input.mousePosition;
 
                 arrow = Instantiate(
-                    arrowPrefab,
-                    new Vector2(transform.position.x + 0.5f, transform.position.y),
-                    Quaternion.identity) as GameObject;
+                arrowPrefab,
+                new Vector2(transform.position.x + 0.5f, transform.position.y),
+                Quaternion.identity) as GameObject;
 
                 //arrow.GetComponent<Rigidbody2D>().isKinematic = true;
                 //arrow.GetComponent<Renderer>().enabled = false;
@@ -133,7 +134,7 @@ public class Player : MonoBehaviour
 
         else if (aiming && !shoot)
         {
-            if (inDeadZone(Input.mousePosition) || inRealeseZone(Input.mousePosition))
+            if (inDeadZone(Input.mousePosition) /*|| inRealeseZone(Input.mousePosition)*/)
             {
                 aiming = false;
                 HidePath();
@@ -147,6 +148,13 @@ public class Player : MonoBehaviour
             aiming = false;
 
             //arrow.GetComponent<Rigidbody2D>().AddForce(GetForce(Input.mousePosition));
+
+
+            if (Input.mousePosition.x >= 190f)
+            {
+                arrow.transform.localScale = new Vector2(-1f, 1f);
+                transform.localScale = new Vector2(-0.5f, 0.5f);
+            }
 
             arrow.transform.Find("ArrowTip").GetComponent<Renderer>().enabled = true;
             arrow.transform.Find("ArrowTale").GetComponent<Renderer>().enabled = true;
@@ -179,18 +187,18 @@ public class Player : MonoBehaviour
         }
     }
 
-    private bool inRealeseZone(Vector2 mouse)
-    {
-        if (mouse.x >= 150f)
-        {
-            return true;
-        }
+    //private bool inRealeseZone(Vector2 mouse)
+    //{
+    //    if (mouse.x >= 150f)
+    //    {
+    //        return true;
+    //    }
 
-        else
-        {
-            return false;
-        }
-    }
+    //    else
+    //    {
+    //        return false;
+    //    }
+    //}
 
     private void ShowPath()
     {
@@ -314,6 +322,9 @@ public class Player : MonoBehaviour
 
         if (target.tag == "Platform")
         {
+            transform.localScale = new Vector2(0.5f, 0.5f);
+
+            ifCanShoot = false;
             shoot = false;
             myAnimator.SetBool("isFalling", false);
             //myAnimator.SetBool("BowIdle", false);

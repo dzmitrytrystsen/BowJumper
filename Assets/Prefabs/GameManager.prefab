@@ -78,5 +78,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1861660793924746, guid: a04a5f0e5a99eb744b798ac526554cad, type: 2}
   platform: {fileID: 1871451535448162, guid: 22df90610286eec439c2e88787ef9b14, type: 2}
-  enemy: {fileID: 1908594433818726, guid: 565c03ba8b9df824ea94d93aea4e29a3, type: 2}
+  enemy:
+  - {fileID: 1908594433818726, guid: 565c03ba8b9df824ea94d93aea4e29a3, type: 2}
+  - {fileID: 1658168441276972, guid: f6c19685b85e5a949aab7a8a27770d74, type: 2}
+  - {fileID: 1281261555965032, guid: 252b1d5c1fa1fad49a0dad6b4b7171ef, type: 2}
+  - {fileID: 1991665698053974, guid: 27ef0220c7da0c44ebf4178a7b5bc85f, type: 2}
   platformsAmount: 0

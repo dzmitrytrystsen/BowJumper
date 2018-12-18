@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject platform;
-    [SerializeField] private GameObject enemy;
+    [SerializeField] private GameObject[] enemy;
 
     [SerializeField] public int platformsAmount;
 
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
 
         temp.y += 1f;
 
-        Instantiate(enemy, temp, Quaternion.identity);
+        Instantiate(enemy[Random.Range(0, enemy.Length)], temp, Quaternion.identity);
 
         AddPlatform();
     }
@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
         Instantiate(platform, temp, Quaternion.identity);
 
         temp.y += 1f;
-        Instantiate(enemy, temp, Quaternion.identity);
+        Instantiate(enemy[Random.Range(0, enemy.Length)], temp, Quaternion.identity);
 
 
         AddPlatform();

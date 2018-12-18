@@ -38,8 +38,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1861660793924746}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.990061, y: -3.6730466, z: -5}
-  m_LocalScale: {x: 0.5235373, y: 0.5235373, z: 0.5235373}
+  m_LocalPosition: {x: -0.5186893, y: -2.7027574, z: -5}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5235373}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -121,14 +121,14 @@ MonoBehaviour:
   myAnimator: {fileID: 0}
   jumpPowerX: 0
   jumpPowerY: 0
-  jumpPowerXMax: 5
+  jumpPowerXMax: 4
   jumpPowerYMax: 25
   ifCanShoot: 0
   ifCanJump: 0
   setPower: 0
   didJump: 0
   isTimeSlow: 0
-  bowPower: 20
+  bowPower: 25
   deadZone: 100
   arrowPrefab: {fileID: 1046263381387172, guid: e93bc6ffc1f34374592a05dfc2585ac9,
     type: 2}
