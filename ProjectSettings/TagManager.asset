@@ -11,6 +11,8 @@ TagManager:
   - EffectorCollider
   - Enemy
   - Arrow
+  - PauseButton
+  - PausePanel
   layers:
   - Default
   - TransparentFX

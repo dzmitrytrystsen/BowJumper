@@ -10,7 +10,7 @@ public class ScoreManager : MonoBehaviour
 
     private Text scoreText;
 
-    public int score;
+    public float score;
 
 	void Awake ()
 	{
@@ -30,5 +30,5 @@ public class ScoreManager : MonoBehaviour
         scoreText.text = "" + score;
     }
 
-    public int GetScore() { return this.score; }
+    public float GetScore() { return this.score; }
 }

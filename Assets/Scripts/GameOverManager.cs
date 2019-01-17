@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOverManager : MonoBehaviour
 {
+    [SerializeField] private Button pauseButton;
+
     public static GameOverManager instance;
 
     private GameObject gameOverPanel;
@@ -14,7 +17,7 @@ public class GameOverManager : MonoBehaviour
     private Button menuButton, restartButton;
 
     private Text score;
-    private GameObject scorePanel;
+    private Text bestScore;
     private GameObject powerBar;
     private GameObject scoreText;
 
@@ -31,9 +34,9 @@ public class GameOverManager : MonoBehaviour
         menuButton.onClick.AddListener(() => BackToMenu());
         restartButton.onClick.AddListener(() => RestartGame());
 
-        scorePanel = GameObject.Find("ScorePanel");
         scoreText = GameObject.Find("Score");
 	    score = GameObject.Find("FinalScore").GetComponent<Text>();
+	    bestScore = GameObject.Find("BestScore").GetComponent<Text>();
 
 	    powerBar = GameObject.Find("PowerBar");
 
@@ -48,14 +51,22 @@ public class GameOverManager : MonoBehaviour
 
     public void GameOver()
     {
+        pauseButton.gameObject.SetActive(false);
+
         scoreText.SetActive(false);
-        scorePanel.SetActive(false);
         powerBar.SetActive(false);
 
         gameOverPanel.SetActive(true);
         gameOverPanelAnimator.Play("GameOverPanelFade");
 
         score.text = "" + ScoreManager.instance.GetScore();
+
+        if (ScoreManager.instance.GetScore() > GameController.instance.GetHighscore())
+        {
+            GameController.instance.SetHighscore(Mathf.RoundToInt(ScoreManager.instance.GetScore()));
+        }
+
+        bestScore.text = "" + GameController.instance.GetHighscore();
     }
 
     public void RestartGame()
@@ -67,9 +78,4 @@ public class GameOverManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-
-    void Update ()
-	{
-		
-	}
 }

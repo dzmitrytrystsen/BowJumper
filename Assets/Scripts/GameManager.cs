@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.UIElements;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
@@ -11,13 +12,13 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [SerializeField] private GameObject player;
-    [SerializeField] private GameObject platform;
-    [SerializeField] private GameObject[] enemy;
-
+    [SerializeField] private GameObject[] platform;
     [SerializeField] public int platformsAmount;
+    [SerializeField] private GameObject pausePanel;
 
+    [SerializeField] private GameObject mountains;
 
-    private float minX = -2f, maxX = 2f, minY = -4f, maxY = -3f;
+    private float minX = -2f, maxX = 2f, minY = -4f, maxY = -1.5f;
 
     private bool lerpCamera;
     private float lerpTime = 1.5f;
@@ -28,7 +29,6 @@ public class GameManager : MonoBehaviour
         SetUpInstance();
         CreateInitialPlatform();
     }
-
 
     void Update()
     {
@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     {
         Vector2 temp = new Vector2(Random.Range(minX, minX + 1.5f), Random.Range(minY, maxY));
 
-        Instantiate(platform, temp, Quaternion.identity);
+        Instantiate(platform[Random.Range(0, platform.Length)], temp, Quaternion.identity);
 
         temp.y += 5f;
 
@@ -66,11 +66,7 @@ public class GameManager : MonoBehaviour
 
         temp = new Vector2(Random.Range(maxX, maxX - 1f), Random.Range(minY, maxY));
 
-        Instantiate(platform, temp, Quaternion.identity);
-
-        temp.y += 1f;
-
-        Instantiate(enemy[Random.Range(0, enemy.Length)], temp, Quaternion.identity);
+        Instantiate(platform[Random.Range(0, platform.Length)], temp, Quaternion.identity);
 
         AddPlatform();
     }
@@ -94,11 +90,7 @@ public class GameManager : MonoBehaviour
         Vector2 temp = new Vector2(Random.Range(newMaxX, newMaxX - 0.3f),
             Random.Range(maxY, maxY - 0.5f));
 
-        Instantiate(platform, temp, Quaternion.identity);
-
-        temp.y += 1f;
-        Instantiate(enemy[Random.Range(0, enemy.Length)], temp, Quaternion.identity);
-
+        Instantiate(platform[Random.Range(0, platform.Length)], temp, Quaternion.identity);
 
         AddPlatform();
     }
@@ -112,23 +104,40 @@ public class GameManager : MonoBehaviour
         Camera.main.transform.position =
             new Vector3(x, Camera.main.transform.position.y, Camera.main.transform.position.z);
 
+        x = Mathf.Lerp(mountains.transform.position.x, lerpX, lerpTime * Time.deltaTime * 0.5f);
+
+        mountains.transform.position =
+            new Vector3(x, mountains.transform.position.y, mountains.transform.position.z);
+
+
         if (Camera.main.transform.position.x >= (lerpX - 0.1f))
         {
             lerpCamera = false;
         }
     }
 
-    //public void SlowTime(float duration, float speed)
-    //{
-    //    //1 = normal speed, 2 = double speed, 0 = standstill. 0.5f = half speed etc
-    //    Time.timeScale = speed;
-    //    StartCoroutine(ResumeNormalSpeed(duration));
-    //}
+    public void PauseGame()
+    {
+        JumpButton.instance.gameObject.SetActive(false);
+        pausePanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
 
-    //public IEnumerator ResumeNormalSpeed(float duration)
-    //{
-    //    yield return new WaitForSeconds(duration * Time.deltaTime);
-    //    Time.timeScale = 1f;
-    //}
+    public void GoToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void ResumeGame()
+    {
+        pausePanel.SetActive(false);
+        Time.timeScale = 1f;
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(1);
+    }
 }
 

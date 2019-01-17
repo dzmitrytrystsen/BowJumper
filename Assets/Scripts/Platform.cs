@@ -7,6 +7,13 @@ public class Platform : MonoBehaviour
 {
     public static Platform instance;
 
+    private Animator myAnimator;
+
+    void Start()
+    {
+        myAnimator = GetComponent<Animator>();
+    }
+
     void OnTriggerEnter2D(Collider2D target)
     {
         if (target.tag == "PlatformKiller")
@@ -20,12 +27,14 @@ public class Platform : MonoBehaviour
             if (GameManager.instance != null)
             {
                 GameManager.instance.CreateNewPlatformAndLerp(target.transform.position.x);
+
+                myAnimator.SetTrigger("Destroy");
+                Destroy(gameObject, 5f);
             }
 
             if (ScoreManager.instance != null)
             {
                 ScoreManager.instance.AddScore();
-                Debug.Log("Landed");
             }
         }
     }

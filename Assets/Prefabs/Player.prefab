@@ -121,18 +121,11 @@ MonoBehaviour:
   myAnimator: {fileID: 0}
   jumpPowerX: 0
   jumpPowerY: 0
-  jumpPowerXMax: 4
-  jumpPowerYMax: 25
-  ifCanShoot: 0
+  jumpPowerXMax: 5
+  jumpPowerYMax: 35
   ifCanJump: 0
   setPower: 0
   didJump: 0
-  isTimeSlow: 0
-  bowPower: 25
-  deadZone: 100
-  arrowPrefab: {fileID: 1046263381387172, guid: e93bc6ffc1f34374592a05dfc2585ac9,
-    type: 2}
-  dotsNumber: 10
 --- !u!212 &212146386872679882
 SpriteRenderer:
   m_ObjectHideFlags: 1
