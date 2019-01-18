@@ -187,7 +187,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -750}
+  m_Offset: {x: 0, y: -850}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -490,7 +490,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 55786324}
-  - component: {fileID: 55786325}
   - component: {fileID: 55786326}
   m_Layer: 5
   m_Name: Background
@@ -525,18 +524,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -13}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &55786325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 55786323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b2d9544f6e9a70459c4b42b6f9a82ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cloud: {fileID: 291603788}
 --- !u!95 &55786326
 Animator:
   serializedVersion: 3
@@ -1118,7 +1105,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &377919072
 GameObject:
@@ -1515,7 +1502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.6407633, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1556,6 +1543,7 @@ GameObject:
   - component: {fileID: 605091681}
   - component: {fileID: 605091680}
   - component: {fileID: 605091679}
+  - component: {fileID: 605091682}
   m_Layer: 5
   m_Name: MenuButton
   m_TagString: Untagged
@@ -1661,6 +1649,24 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 605091677}
   m_CullTransparentMesh: 0
+--- !u!95 &605091682
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 605091677}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e5405b98e5f18dd4bb0ffdafbf358201, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &687944488
 GameObject:
   m_ObjectHideFlags: 0
@@ -1931,7 +1937,7 @@ RectTransform:
   m_Children:
   - {fileID: 960577387}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2374,8 +2380,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 0}
+  m_AnchoredPosition: {x: 2.949997, y: 0}
+  m_SizeDelta: {x: 15.98, y: -52.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1047172540
 MonoBehaviour:
@@ -2397,7 +2403,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: da9963ac2869b3d43bb61297c80fbc55, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2803,7 +2809,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1333910818
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3393,7 +3399,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4627435227299226, guid: f9b42c2ec2979984e98a63396f7b111b, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114959227966005576, guid: f9b42c2ec2979984e98a63396f7b111b,
         type: 2}
@@ -3416,6 +3422,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1095609200281424, guid: 22df90610286eec439c2e88787ef9b14,
         type: 2}
+    - target: {fileID: 114959227966005576, guid: f9b42c2ec2979984e98a63396f7b111b,
+        type: 2}
+      propertyPath: pauseButton
+      value: 
+      objectReference: {fileID: 52802597}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9b42c2ec2979984e98a63396f7b111b, type: 2}
   m_IsPrefabAsset: 0
@@ -3773,7 +3784,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4807879021383216, guid: 6534c88e2ac65364b86e9d1a0f3ccd66, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114577917232173622, guid: 6534c88e2ac65364b86e9d1a0f3ccd66,
         type: 2}

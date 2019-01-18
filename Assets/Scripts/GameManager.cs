@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject[] platform;
     [SerializeField] public int platformsAmount;
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private Button pauseButton;
 
     [SerializeField] private GameObject mountains;
 
@@ -118,6 +119,7 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
+        pauseButton.gameObject.SetActive(false);
         JumpButton.instance.gameObject.SetActive(false);
         pausePanel.SetActive(true);
         Time.timeScale = 0f;
@@ -125,11 +127,13 @@ public class GameManager : MonoBehaviour
 
     public void GoToMenu()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }
 
     public void ResumeGame()
     {
+        pauseButton.gameObject.SetActive(true);
         pausePanel.SetActive(false);
         Time.timeScale = 1f;
     }

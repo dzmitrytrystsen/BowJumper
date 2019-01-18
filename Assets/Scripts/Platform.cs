@@ -22,19 +22,18 @@ public class Platform : MonoBehaviour
             GameManager.instance.SubstractPlatform();
         }
 
-        if (target.tag == "Player" && Player.instance.didJump)
+        if (target.tag == "Player")
         {
-            if (GameManager.instance != null)
-            {
-                GameManager.instance.CreateNewPlatformAndLerp(target.transform.position.x);
-
-                myAnimator.SetTrigger("Destroy");
-                Destroy(gameObject, 5f);
-            }
-
-            if (ScoreManager.instance != null)
+            if (GameManager.instance != null && Player.instance.didJump)
             {
                 ScoreManager.instance.AddScore();
+                myAnimator.SetTrigger("Destroy");
+                GameManager.instance.CreateNewPlatformAndLerp(target.transform.position.x);
+            }
+
+            if (ScoreManager.instance != null && Player.instance.didJump)
+            {
+                Destroy(gameObject, 5f);
             }
         }
     }

@@ -28,6 +28,12 @@ public class Player : MonoBehaviour
 
     private GameObject jumpButton;
 
+    [SerializeField] private GameObject dustAfterJump;
+    [SerializeField] public AudioSource myAudioSource;
+    [SerializeField] public AudioClip landingAudioClip, powerUpAudioClip, deathAudioClip;
+
+    private Collider2D myCollider2D;
+
     void Awake()
     {
         Initialization();
@@ -44,6 +50,7 @@ public class Player : MonoBehaviour
     {
         myRigidbody2D = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
+        myCollider2D = GetComponent<Collider2D>();
         powerBar = GameObject.Find("PowerBar").GetComponent<Slider>();
         jumpButton = GameObject.Find("JumpButton");
 
@@ -108,6 +115,20 @@ public class Player : MonoBehaviour
         powerBar.value = powerBarValue;
     }
 
+    private void Death()
+    {
+        transform.position = new Vector2(Camera.main.transform.position.x, Camera.main.transform.position.y - 6f);
+
+        myRigidbody2D.isKinematic = true;
+        myRigidbody2D.velocity = new Vector2(0f, 40f * Time.deltaTime);
+
+        myAudioSource.PlayOneShot(deathAudioClip);
+        myAnimator.SetTrigger("Dead");
+
+        Destroy(myCollider2D);
+        Destroy(gameObject, 20f);
+    }
+
     void OnTriggerEnter2D(Collider2D target)
     {
         if (didJump)
@@ -120,6 +141,9 @@ public class Player : MonoBehaviour
             transform.localScale = new Vector2(0.5f, 0.5f);
 
             myAnimator.SetBool("isFalling", false);
+
+            Instantiate(dustAfterJump, new Vector2(transform.position.x - 0.3f, transform.position.y - 0.7f), Quaternion.identity);
+            myAudioSource.PlayOneShot(landingAudioClip);
         }
 
         if (target.tag == "EffectorCollider")
@@ -129,12 +153,12 @@ public class Player : MonoBehaviour
 
         if (target.tag == "DeathCollider")
         {
+            Death();
+
             if (GameOverManager.instance != null)
             {
                 GameOverManager.instance.GameOver();
             }
-
-            Destroy(gameObject, 0.1f);
         }
     }
 

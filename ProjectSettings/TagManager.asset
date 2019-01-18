@@ -13,6 +13,7 @@ TagManager:
   - Arrow
   - PauseButton
   - PausePanel
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -64,4 +65,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 39843965
+    locked: 0
+  - name: VFX
+    uniqueID: 214537317
     locked: 0

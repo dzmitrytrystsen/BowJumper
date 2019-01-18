@@ -23,11 +23,15 @@ public class JumpButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         if (Player.instance != null)
             Player.instance.SetPower(true);
+
+        Player.instance.myAudioSource.PlayOneShot(Player.instance.powerUpAudioClip);
     }
 
     public void OnPointerUp(PointerEventData data)
     {
         if (Player.instance != null)
             Player.instance.SetPower(false);
+
+        Player.instance.myAudioSource.Stop();
     }
 }
