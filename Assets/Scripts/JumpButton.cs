@@ -33,5 +33,6 @@ public class JumpButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             Player.instance.SetPower(false);
 
         Player.instance.myAudioSource.Stop();
+        Player.instance.myAudioSource.PlayOneShot(Player.instance.JumpAudioClip);
     }
 }

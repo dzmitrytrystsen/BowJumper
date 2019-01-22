@@ -204,3 +204,4 @@ C:\Users\DZMITRY TRYSTSEN\Unity\BowJumper\obj\Debug\Assembly-CSharp-Editor.cspro
 C:\Users\DZMITRY TRYSTSEN\Unity\BowJumper\obj\Debug\Assembly-CSharp-Editor.csproj.CopyComplete
 C:\Users\DZMITRY TRYSTSEN\Unity\BowJumper\obj\Debug\Assembly-CSharp-Editor.dll
 C:\Users\DZMITRY TRYSTSEN\Unity\BowJumper\obj\Debug\Assembly-CSharp-Editor.pdb
+C:\Users\DZMITRY TRYSTSEN\Unity\BowJumper\Temp\bin\Debug\JMOAssets.dll

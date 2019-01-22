@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.Experimental.UIElements;
+using Random = UnityEngine.Random;
 using Slider = UnityEngine.UI.Slider;
 
 public class Player : MonoBehaviour
@@ -30,7 +31,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private GameObject dustAfterJump;
     [SerializeField] public AudioSource myAudioSource;
-    [SerializeField] public AudioClip landingAudioClip, powerUpAudioClip, deathAudioClip;
+    [SerializeField] public AudioClip landingAudioClip, powerUpAudioClip, deathAudioClip, JumpAudioClip;
 
     private Collider2D myCollider2D;
 

@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject[] platform;
+    [SerializeField] private GameObject[] birds;
     [SerializeField] public int platformsAmount;
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private Button pauseButton;
@@ -24,6 +25,16 @@ public class GameManager : MonoBehaviour
     private bool lerpCamera;
     private float lerpTime = 1.5f;
     private float lerpX;
+
+    private bool looping = true;
+
+    IEnumerator Start()
+    {
+        do
+        {
+            yield return StartCoroutine(BirdsCreator());
+        } while (looping);
+    }
 
     void Awake()
     {
@@ -94,6 +105,23 @@ public class GameManager : MonoBehaviour
         Instantiate(platform[Random.Range(0, platform.Length)], temp, Quaternion.identity);
 
         AddPlatform();
+    }
+
+    public void CreateBirds()
+    {
+        Vector2 temp = new Vector2(Camera.main.transform.position.x + 3f, Random.Range(-4.5f, 4.5f));
+
+        GameObject bird = Instantiate(birds[Random.Range(0, birds.Length)], temp, Quaternion.identity);
+        bird.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(-50f, -80f) * Time.deltaTime, 0f);
+
+        Destroy(bird, 7f);
+    }
+
+    IEnumerator BirdsCreator()
+    {
+        CreateBirds();
+
+        yield return new WaitForSeconds(1f);
     }
 
     void LerpCamera()

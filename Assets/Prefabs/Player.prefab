@@ -227,6 +227,7 @@ MonoBehaviour:
   landingAudioClip: {fileID: 8300000, guid: 83a51500a5b9e5344a9b161b31453a1b, type: 3}
   powerUpAudioClip: {fileID: 8300000, guid: c1b3caac4412c2343a87e9c9bbf774e8, type: 3}
   deathAudioClip: {fileID: 8300000, guid: a57b79664a7ac804bb9eed887f78571a, type: 3}
+  JumpAudioClip: {fileID: 8300000, guid: fde6ccfd6752b404c8ffe55cb8ba4f63, type: 3}
 --- !u!212 &212146386872679882
 SpriteRenderer:
   m_ObjectHideFlags: 1
