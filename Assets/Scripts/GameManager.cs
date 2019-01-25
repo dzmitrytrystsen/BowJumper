@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
     {
         CreateBirds();
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
     }
 
     void LerpCamera()
@@ -137,7 +137,6 @@ public class GameManager : MonoBehaviour
 
         mountains.transform.position =
             new Vector3(x, mountains.transform.position.y, mountains.transform.position.z);
-
 
         if (Camera.main.transform.position.x >= (lerpX - 0.1f))
         {
