@@ -14,6 +14,12 @@ public class Platform : MonoBehaviour
         myAnimator = GetComponent<Animator>();
     }
 
+    private void DestroyPlatform()
+    {
+        gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
+        Destroy(gameObject, 2f);
+    }
+
     void OnTriggerEnter2D(Collider2D target)
     {
         if (target.tag == "PlatformKiller")
@@ -33,7 +39,7 @@ public class Platform : MonoBehaviour
 
             if (ScoreManager.instance != null && Player.instance.didJump)
             {
-                Destroy(gameObject, 5f);
+                Invoke("DestroyPlatform", 5f);
             }
         }
     }
@@ -42,7 +48,7 @@ public class Platform : MonoBehaviour
     {
         if (target.tag == "Player")
         {
-            gameObject.GetComponent<Collider2D>().enabled = false;
+            gameObject.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 }

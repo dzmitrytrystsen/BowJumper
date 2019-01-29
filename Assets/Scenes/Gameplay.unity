@@ -3503,7 +3503,7 @@ Prefab:
         type: 2}
       propertyPath: platform.Array.data[1]
       value: 
-      objectReference: {fileID: 1063323019889204, guid: 7eda3ce34b443794781adfef846974c3,
+      objectReference: {fileID: 1490709133935304, guid: 7eda3ce34b443794781adfef846974c3,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9b42c2ec2979984e98a63396f7b111b, type: 2}
