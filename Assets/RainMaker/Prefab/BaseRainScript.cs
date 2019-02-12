@@ -46,8 +46,8 @@ namespace DigitalRuby.RainMaker
         [Range(0.0f, 1.0f)]
         public float RainMistThreshold = 0.5f;
 
-        [Tooltip("Wind looping clip")]
-        public AudioClip WindSound;
+        //[Tooltip("Wind looping clip")]
+        //public AudioClip WindSound;
 
         [Tooltip("Wind sound volume modifier, use this to lower your sound if it's too loud.")]
         public float WindSoundVolumeModifier = 0.5f;
@@ -64,11 +64,11 @@ namespace DigitalRuby.RainMaker
         [Tooltip("Whether wind should be enabled.")]
         public bool EnableWind = true;
 
-        protected LoopingAudioSource audioSourceRainLight;
-        protected LoopingAudioSource audioSourceRainMedium;
-        protected LoopingAudioSource audioSourceRainHeavy;
-        protected LoopingAudioSource audioSourceRainCurrent;
-        protected LoopingAudioSource audioSourceWind;
+        //protected LoopingAudioSource audioSourceRainLight;
+        //protected LoopingAudioSource audioSourceRainMedium;
+        //protected LoopingAudioSource audioSourceRainHeavy;
+        //protected LoopingAudioSource audioSourceRainCurrent;
+        //protected LoopingAudioSource audioSourceWind;
         protected Material rainMaterial;
         protected Material rainExplosionMaterial;
         protected Material rainMistMaterial;
@@ -103,7 +103,7 @@ namespace DigitalRuby.RainMaker
                         WindZone.transform.rotation = Quaternion.Euler(UnityEngine.Random.Range(-30.0f, 30.0f), UnityEngine.Random.Range(0.0f, 360.0f), 0.0f);
                     }
                     nextWindTime = Time.time + UnityEngine.Random.Range(WindChangeInterval.x, WindChangeInterval.y);
-                    audioSourceWind.Play((WindZone.windMain / WindSpeedRange.z) * WindSoundVolumeModifier);
+                    //audioSourceWind.Play((WindZone.windMain / WindSpeedRange.z) * WindSoundVolumeModifier);
                 }
             }
             else
@@ -112,10 +112,10 @@ namespace DigitalRuby.RainMaker
                 {
                     WindZone.gameObject.SetActive(false);
                 }
-                audioSourceWind.Stop();
+                //.Stop();
             }
 
-            audioSourceWind.Update();
+            //audioSourceWind.Update();
         }
 
         private void CheckForRainChange()
@@ -125,11 +125,11 @@ namespace DigitalRuby.RainMaker
                 lastRainIntensityValue = RainIntensity;
                 if (RainIntensity <= 0.01f)
                 {
-                    if (audioSourceRainCurrent != null)
-                    {
-                        audioSourceRainCurrent.Stop();
-                        audioSourceRainCurrent = null;
-                    }
+                    //if (audioSourceRainCurrent != null)
+                    //{
+                    //    audioSourceRainCurrent.Stop();
+                    //    audioSourceRainCurrent = null;
+                    //}
                     if (RainFallParticleSystem != null)
                     {
                         ParticleSystem.EmissionModule e = RainFallParticleSystem.emission;
@@ -146,27 +146,27 @@ namespace DigitalRuby.RainMaker
                 else
                 {
                     LoopingAudioSource newSource;
-                    if (RainIntensity >= 0.67f)
-                    {
-                        newSource = audioSourceRainHeavy;
-                    }
-                    else if (RainIntensity >= 0.33f)
-                    {
-                        newSource = audioSourceRainMedium;
-                    }
-                    else
-                    {
-                        newSource = audioSourceRainLight;
-                    }
-                    if (audioSourceRainCurrent != newSource)
-                    {
-                        if (audioSourceRainCurrent != null)
-                        {
-                            audioSourceRainCurrent.Stop();
-                        }
-                        audioSourceRainCurrent = newSource;
-                        audioSourceRainCurrent.Play(1.0f);
-                    }
+                    //if (RainIntensity >= 0.67f)
+                    //{
+                    //    newSource = audioSourceRainHeavy;
+                    //}
+                    //else if (RainIntensity >= 0.33f)
+                    //{
+                    //    newSource = audioSourceRainMedium;
+                    //}
+                    //else
+                    //{
+                    //    newSource = audioSourceRainLight;
+                    //}
+                    //if (audioSourceRainCurrent != newSource)
+                    //{
+                    //    if (audioSourceRainCurrent != null)
+                    //    {
+                    //        audioSourceRainCurrent.Stop();
+                    //    }
+                    //    audioSourceRainCurrent = newSource;
+                    //    audioSourceRainCurrent.Play(1.0f);
+                    //}
                     if (RainFallParticleSystem != null)
                     {
                         ParticleSystem.EmissionModule e = RainFallParticleSystem.emission;
@@ -228,8 +228,8 @@ namespace DigitalRuby.RainMaker
             //audioSourceRainLight = new LoopingAudioSource(this, RainSoundLight);
             //audioSourceRainMedium = new LoopingAudioSource(this, RainSoundMedium);
             //audioSourceRainHeavy = new LoopingAudioSource(this, RainSoundHeavy);
-            audioSourceRainHeavy = new LoopingAudioSource(this, WindSound);
-            audioSourceWind = new LoopingAudioSource(this, WindSound);
+            //audioSourceRainHeavy = new LoopingAudioSource(this, WindSound);
+            //audioSourceWind = new LoopingAudioSource(this, WindSound);
 
             if (RainFallParticleSystem != null)
             {
@@ -286,7 +286,7 @@ namespace DigitalRuby.RainMaker
             UpdateWind();
             //audioSourceRainLight.Update();
             //audioSourceRainMedium.Update();
-            audioSourceRainHeavy.Update();
+            //audioSourceRainHeavy.Update();
         }
 
         protected virtual float RainFallEmissionRate()
