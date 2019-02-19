@@ -14,6 +14,12 @@ TagManager:
   - PauseButton
   - PausePanel
   - FxTemporaire
+  - ExplosionFX
+  - ground
+  - Obstacle
+  - Bullet
+  - HealthBar
+  - BombPickup
   layers:
   - Default
   - TransparentFX
@@ -29,8 +35,8 @@ TagManager:
   - WindZone
   - PlatformKiller
   - EffectorCollider
-  - Enemy
-  - Arrow
+  - PlatformClone
+  - CloneCollider
   - 
   - 
   - 
@@ -59,6 +65,9 @@ TagManager:
     locked: 0
   - name: Platform
     uniqueID: 4054865323
+    locked: 0
+  - name: PlatfomClone
+    uniqueID: 3737770355
     locked: 0
   - name: Player
     uniqueID: 3049303173

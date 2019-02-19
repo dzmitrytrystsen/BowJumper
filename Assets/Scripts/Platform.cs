@@ -37,7 +37,7 @@ public class Platform : MonoBehaviour
                 GameManager.instance.CreateNewPlatformAndLerp(target.transform.position.x);
             }
 
-            if (ScoreManager.instance != null && Player.instance.didJump)
+            if (ScoreManager.instance != null)
             {
                 Invoke("DestroyPlatform", 5f);
             }
@@ -49,6 +49,9 @@ public class Platform : MonoBehaviour
         if (target.tag == "Player")
         {
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
+            GameManager.instance.SubstractPlatform();
+            Destroy(gameObject, 1.5f);
         }
     }
 }

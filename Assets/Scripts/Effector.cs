@@ -27,14 +27,14 @@ public class Effector : MonoBehaviour
     {
         if (target.tag == "Player")
         {
-            if (windForce <= 55f)
+            if (windForce <= 46f)
             {
                 windForce = GetComponent<AreaEffector2D>().forceMagnitude += score / difficulty;
             }
 
             else
             {
-                windForce = 55f;
+                windForce = 46f;
             }
         }
     }

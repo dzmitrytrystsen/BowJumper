@@ -14,11 +14,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject[] platform;
     [SerializeField] private GameObject[] birds;
+    [SerializeField] private Sprite[] muteButtonSprite;
     [SerializeField] public int platformsAmount;
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private Button pauseButton;
-
     [SerializeField] private GameObject mountains;
+
+    public GameObject instructionsText;
+
+    private Button muteButton;
 
     private float minX = -2f, maxX = 2f, minY = -4f, maxY = -1.5f;
 
@@ -150,6 +154,16 @@ public class GameManager : MonoBehaviour
         JumpButton.instance.gameObject.SetActive(false);
         pausePanel.SetActive(true);
         Time.timeScale = 0f;
+
+        muteButton = GameObject.Find("MuteButton").GetComponent<Button>();
+
+        if (GameController.instance.isGameMuted)
+            muteButton.GetComponent<Image>().sprite = GameController.instance.muteButtonSprites[1];
+
+        else
+            muteButton.GetComponent<Image>().sprite = GameController.instance.muteButtonSprites[0];
+
+        HideTheInstruction();
     }
 
     public void GoToMenu()
@@ -169,6 +183,25 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(1);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+    public void MuteSound()
+    {
+        GameController.instance.MuteSound();
+    }
+
+    public void HideTheInstruction()
+    {
+        if (!instructionsText)
+        {
+            instructionsText = GameObject.Find("InstructionsText");
+            instructionsText.SetActive(false);
+        }
     }
 }
 

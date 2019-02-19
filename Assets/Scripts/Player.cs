@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float jumpPowerX, jumpPowerY, jumpPowerXMax = 6.5f, jumpPowerYMax = 13.5f;
     [SerializeField] private bool ifCanJump;
 
+
     private float tresholdX = 7f;
     private float tresholdY = 14f;
 
@@ -30,8 +31,6 @@ public class Player : MonoBehaviour
     private GameObject jumpButton;
 
     [SerializeField] private GameObject dustAfterJump;
-    [SerializeField] public AudioSource myAudioSource;
-    [SerializeField] public AudioClip landingAudioClip, powerUpAudioClip, deathAudioClip, JumpAudioClip;
 
     private Collider2D myCollider2D;
 
@@ -53,7 +52,7 @@ public class Player : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         myCollider2D = GetComponent<Collider2D>();
         powerBar = GameObject.Find("PowerBar").GetComponent<Slider>();
-        jumpButton = GameObject.Find("JumpButton");
+        jumpButton = GameObject.Find("JumpButton");       
 
         powerBar.minValue = 0f;
         powerBar.maxValue = 10f;
@@ -123,7 +122,8 @@ public class Player : MonoBehaviour
         myRigidbody2D.isKinematic = true;
         myRigidbody2D.velocity = new Vector2(0f, 40f * Time.deltaTime);
 
-        myAudioSource.PlayOneShot(deathAudioClip);
+        GameController.instance.myAudioSource.PlayOneShot(
+            GameController.instance. deathAudioClip, .5f);
         myAnimator.SetTrigger("Dead");
 
         Destroy(myCollider2D);
@@ -144,7 +144,8 @@ public class Player : MonoBehaviour
             myAnimator.SetBool("isFalling", false);
 
             Instantiate(dustAfterJump, new Vector2(transform.position.x - 0.3f, transform.position.y - 0.7f), Quaternion.identity);
-            myAudioSource.PlayOneShot(landingAudioClip);
+            GameController.instance.myAudioSource.PlayOneShot(
+                GameController.instance.landingAudioClip, 1f);
         }
 
         if (target.tag == "EffectorCollider")

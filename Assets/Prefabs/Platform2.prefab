@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4379214599727742}
   - component: {fileID: 61104640234309426}
   - component: {fileID: 249754086398294258}
-  - component: {fileID: 114468855870755172}
   m_Layer: 13
   m_Name: EffectorCollider
   m_TagString: EffectorCollider
@@ -190,17 +189,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114468855870755172
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1412192594733994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e598bb40e308dd408f8e1e2370534fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114553755984628760
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -51,6 +51,8 @@ public class GameOverManager : MonoBehaviour
 
     public void GameOver()
     {
+        GameManager.instance.HideTheInstruction();
+
         pauseButton.gameObject.SetActive(false);
 
         scoreText.SetActive(false);

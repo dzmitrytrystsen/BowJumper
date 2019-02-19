@@ -1,9 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+    [SerializeField] public AudioClip landingAudioClip, powerUpAudioClip, deathAudioClip, jumpAudioClip;
+    [SerializeField] public Sprite[] muteButtonSprites;
+
+    public bool isGameMuted = false;
+
+    private Button muteButton;
+
+    private AudioSource mainThemeAudioSource;
+
+    public AudioSource myAudioSource;
+
 
     public static GameController instance;
 
@@ -13,7 +25,10 @@ public class GameController : MonoBehaviour
 	{
 		SetUpSingleton();
         IsTheGameStartedForTheFirstTime();
-	}
+
+	    myAudioSource = GetComponent<AudioSource>();
+        mainThemeAudioSource = GameObject.Find("MainTheme").GetComponent<AudioSource>();
+    }
 
     private void SetUpSingleton()
     {
@@ -44,5 +59,29 @@ public class GameController : MonoBehaviour
     public int GetHighscore()
     {
         return PlayerPrefs.GetInt(highScore);
+    }
+
+    public void MuteSound()
+    {
+        if (myAudioSource.mute && mainThemeAudioSource.mute)
+        {
+            myAudioSource.mute = false;
+            mainThemeAudioSource.mute = false;
+
+            muteButton = GameObject.Find("MuteButton").GetComponent<Button>();
+            muteButton.GetComponent<Image>().sprite = muteButtonSprites[0];
+
+            isGameMuted = false;
+        }
+
+        else
+        {
+            myAudioSource.mute = true;
+            mainThemeAudioSource.mute = true;
+            muteButton = GameObject.Find("MuteButton").GetComponent<Button>();
+            muteButton.GetComponent<Image>().sprite = muteButtonSprites[1];
+
+            isGameMuted = true;
+        }
     }
 }
