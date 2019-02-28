@@ -25,7 +25,7 @@ public class JumpButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             Player.instance.SetPower(true);
 
         GameController.instance.myAudioSource.PlayOneShot(
-            GameController.instance.powerUpAudioClip, .2f);
+            GameController.instance.powerUpAudioClip, .1f);
     }
 
     public void OnPointerUp(PointerEventData data)
@@ -35,6 +35,6 @@ public class JumpButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
         GameController.instance.myAudioSource.Stop();
         GameController.instance.myAudioSource.PlayOneShot(
-            GameController.instance.jumpAudioClip, .5f);
+            GameController.instance.jumpAudioClip, .3f);
     }
 }

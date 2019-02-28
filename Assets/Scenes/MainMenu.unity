@@ -245,11 +245,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114536641065374162, guid: 0468acff7804f284698f0b30f2f040af,
-        type: 2}
-      propertyPath: muteButtonSprites.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4362480841371928, guid: 0468acff7804f284698f0b30f2f040af, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -282,18 +277,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114536641065374162, guid: 0468acff7804f284698f0b30f2f040af,
-        type: 2}
-      propertyPath: muteButtonSprites.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: 4ff5167928ab5c34fae2f31df913dc4d,
-        type: 3}
-    - target: {fileID: 114536641065374162, guid: 0468acff7804f284698f0b30f2f040af,
-        type: 2}
-      propertyPath: muteButtonSprites.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: 005777bbed9f2fb4896e1a9fc2c8d061,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0468acff7804f284698f0b30f2f040af, type: 2}
   m_IsPrefabAsset: 0

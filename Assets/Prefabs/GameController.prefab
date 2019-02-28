@@ -177,7 +177,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -276,4 +276,8 @@ MonoBehaviour:
   powerUpAudioClip: {fileID: 8300000, guid: c1b3caac4412c2343a87e9c9bbf774e8, type: 3}
   deathAudioClip: {fileID: 8300000, guid: a57b79664a7ac804bb9eed887f78571a, type: 3}
   jumpAudioClip: {fileID: 8300000, guid: fde6ccfd6752b404c8ffe55cb8ba4f63, type: 3}
+  muteButtonSprites:
+  - {fileID: 21300000, guid: 4ff5167928ab5c34fae2f31df913dc4d, type: 3}
+  - {fileID: 21300000, guid: 005777bbed9f2fb4896e1a9fc2c8d061, type: 3}
+  isGameMuted: 0
   myAudioSource: {fileID: 0}
